@@ -1,5 +1,6 @@
 /**********************************************************************
 cs1713p3.h
+GitHub Test Push
 Purpose:
     Defines typedefs for
         Customer - includes email address, full name, birthdate, gender,
@@ -12,12 +13,12 @@ Purpose:
         program return codes
     Prototypes
 Notes:
-    
+
 **********************************************************************/
 
 /**** typedefs ****/
 
-// Customer information 
+// Customer information
 typedef struct
 {
     char        cGender;                    // M - Male or F - Female
@@ -25,17 +26,17 @@ typedef struct
     char        szEmailAddr[51];            // customer's email address is used
                                             // to uniquely define a customer
     char        szFullName[31];             // customer full name
-    char        szStreetAddress[31];        // street number, street name, and 
+    char        szStreetAddress[31];        // street number, street name, and
                                             // (optional) apartment number
     char        szCity[21];                 // address city
     char        szStateCd[3];               // address state code
     char        szZipCd[6];                 // address zip code
 } Customer;
 
-// Flight Request information 
+// Flight Request information
 typedef struct
 {
-    char szFlightId[11];                   // Flight Identifier 
+    char szFlightId[11];                   // Flight Identifier
     int iRequestSeats;                     // Requested number of seats
 } FlightRequest;
 
@@ -51,7 +52,7 @@ typedef struct
 } Flight;
 
 /**** constants ****/
-// Maximum sizes 
+// Maximum sizes
 #define MAX_FLIGHTS 30
 #define MAX_FLIGHT_ID_SIZE 11
 #define MAX_LINE_SIZE 100

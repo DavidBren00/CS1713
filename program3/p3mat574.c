@@ -1,20 +1,21 @@
 /***********************************************************************************
 p3mat574.c by Rafael Rodriguez   (skeletal version)
+GitHub Test Push
 Purpose:
-    This program reads flight information and a command file.   It 
+    This program reads flight information and a command file.   It
     processes the commands against the flight information.
     This file contains the functions that students write.
 Command Parameters:
     p3 -f flightFileName -c commandFileName
 Input:
     Flight   Stream input file which contains many records defining flights:
-                 szFlightId szFrom  szDest  szDepartTm  iAvailSeats dSeatPrice 
-                 10s        3s      3s      5s          4d          10lf 
+                 szFlightId szFrom  szDest  szDepartTm  iAvailSeats dSeatPrice
+                 10s        3s      3s      5s          4d          10lf
 
-    Command  This is different from the previous assignment.  The file contains 
-             text in the form of commands (one command per text line):  
+    Command  This is different from the previous assignment.  The file contains
+             text in the form of commands (one command per text line):
                  CUSTOMER BEGIN cGender   szBirthDt   szEmailAddr    szFullName
-                     specifies the beginning of customer request and includes 
+                     specifies the beginning of customer request and includes
                      all the identification information from program 2.
                  CUSTOMER ADDRESS szStreetAddress,szCity,szStateCd,szZipCd
                      specifies the address for a customer (separated by commas)
@@ -28,11 +29,11 @@ Input:
                      >	Print the unit price and cost.
                      >	Accumulate the total cost for this customer
                  CUSTOMER COMPLETE
-                     specifies the completion of the list of flight requests 
+                     specifies the completion of the list of flight requests
                      for a customer.
                  FLIGHT INCREASE szFlightId iQuantity
                      increase the available seats for a flight by the specified quantity.
-                 FLIGHT SHOW szFlightId    
+                 FLIGHT SHOW szFlightId
                      requests a display of a particular flight.  Show all of its information.
 
 Results:
@@ -57,24 +58,26 @@ Notes:
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "cs1713p3.h"
 
 /******************** getFlights **************************************
     int getFlights(Flight flightM[])
 Purpose:
 
 Parameters:
-  
+
 Returns:
-    
+
 Notes:
-    
+
 **************************************************************************/
 int getFlights(Flight flightM[], char * pszFlightFileName)
 {
     char szInputBuffer[100];		// input buffer for reading data
     int i = 0;                      // subscript in flightM
     int iScanfCnt;                  // returned by sscanf
-    FILE *pFileFlight;              // Stream Input for Flights data. 
+    FILE *pFileFlight;              // Stream Input for Flights data.
+
 
     /* open the Flights stream data file */
     if (pszFlightFileName == NULL)
@@ -85,7 +88,7 @@ int getFlights(Flight flightM[], char * pszFlightFileName)
         exitError(ERR_FLIGHT_FILENAME, pszFlightFileName);
 
     while (fgets(szInputBuffer, MAX_LINE_SIZE, pFileFlight) != NULL) {
-		
+
 		iScanfCnt = sscanf(szInputBuffer, "%10s %3s %3s %5s %4d %10lf\n"
         		, flightM[i].szFlightId
         		, flightM[i].szFrom
@@ -94,7 +97,7 @@ int getFlights(Flight flightM[], char * pszFlightFileName)
             	, &flightM[i].iAvailSeatCnt
             	, &flightM[i].dSeatPrice
 		);
-		
+
 		if(iScanfCnt < 6) {
 			exitError(ERR_FLIGHT_DEF_DATA, szInputBuffer);
 		}
@@ -108,11 +111,11 @@ int getFlights(Flight flightM[], char * pszFlightFileName)
 Purpose:
 
 Parameters:
-  
+
 Returns:
-    
+
 Notes:
-    
+
 **************************************************************************/
 //void sortFlights(Flight flightM[], int iFlightCnt) // from skeleton code
 void sortFlights(Flight flightM[], int iFlightCnt) // from the bubble sort code
@@ -144,11 +147,11 @@ void sortFlights(Flight flightM[], int iFlightCnt) // from the bubble sort code
 Purpose:
 
 Parameters:
-  
+
 Returns:
-    
+
 Notes:
-    
+
 **************************************************************************/
 void printFlights(char *pszHeading, Flight flightM[], int iFlightCnt)
 {
@@ -176,24 +179,24 @@ void printFlights(char *pszHeading, Flight flightM[], int iFlightCnt)
 Purpose:
     Processes the subcommands associated with the CUSTOMER command:
                  CUSTOMER BEGIN cGender   szBirthDt   szEmailAddr    szFullName
-                     specifies the beginning of customer request and includes 
+                     specifies the beginning of customer request and includes
                      all the identification information from program 2.
                  CUSTOMER ADDRESS szStreetAddress,szCity,szStateCd,szZipCd
                      specifies the address for a customer (separated by commas)
                  CUSTOMER REQUEST szFlightId iNumSeats
                      specifies a single flight request.  Steps:
                      >	Print the flight ID and requested number of seats
-                     >	Lookup the flight ID using a binary search.  If 
-                        not found, print a warning (but do not terminate your 
+                     >	Lookup the flight ID using a binary search.  If
+                        not found, print a warning (but do not terminate your
                         program) and return.
-                     >	If found, try to satisfy the entire requested number 
-                        of seats.  If not enough seats, print a warning and 
+                     >	If found, try to satisfy the entire requested number
+                        of seats.  If not enough seats, print a warning and
                         return.
                      >	Print the unit price and cost.
                      >	Accumulate the total cost for this customer
 
                  CUSTOMER COMPLETE
-                     specifies the completion of the list of flight requests 
+                     specifies the completion of the list of flight requests
                      for a customer.
 Parameters:
     I/O Flight flightM[]              Array of flights
@@ -202,12 +205,12 @@ Parameters:
     I   char  *pzRemainingInput       Points to the remaining characters in the input
                                       line (i.e., the characters that following the
                                       subcommand).
-    I/O Customer *pCustomer           The BEGIN subcommand begins a new customer.  The 
+    I/O Customer *pCustomer           The BEGIN subcommand begins a new customer.  The
                                       customer's Request Total Cost must be set to 0.
     I/O double   *pdCustomerRequestTotalCost     The customer total cost.  This changes depending
                                       on the subcommand:
                                           BEGIN - set to 0
-                                          REQUEST - add the cost  (unless there is a warning) 
+                                          REQUEST - add the cost  (unless there is a warning)
 Notes:
 
 **************************************************************************/
@@ -217,12 +220,20 @@ void processCustomerCommand(Flight flightM[], int iFlightCnt
 {
     int iScanfCnt;
     FlightRequest flightRequest;
+    char szInputBuffer[MAX_LINE_SIZE];
+    Customer customer;
+    int count = 0;
+    int i;
 
     // Determine what to do based on the subCommand
     if (strcmp(pszSubCommand, "BEGIN") == 0)
     {
         // get the Customer Identification Information
-        // your code
+        iScanfCnt = sscanf(pszRemainingInput, "%c %10s %40s %30[^\n]\n"
+             , &pCustomer->cGender
+             , pCustomer->szBirthDt
+             , pCustomer->szEmailAddr
+             , pCustomer->szFullName);
 
         if (iScanfCnt < 4)
             exitError(ERR_CUSTOMER_ID_DATA, pszRemainingInput);
@@ -231,13 +242,36 @@ void processCustomerCommand(Flight flightM[], int iFlightCnt
     else if (strcmp(pszSubCommand, "COMPLETE") == 0)
     {
         // print the customer's total cost
-        // your code 
+        // your code
+	}
 
-    }
     else if (strcmp(pszSubCommand, "ADDRESS") == 0)
     {
-        // get the postal address 
-        // your code 
+        // get the postal address
+        // your code
+		iScanfCnt = sscanf(pszRemainingInput, "%30[^,], %20[^,], %2[^,], %5[^\n]\n"
+            , pCustomer->szStreetAddress
+            , pCustomer->szCity
+            , pCustomer->szStateCd
+            , pCustomer->szZipCd);
+
+        printf("******************** Flight Reservation Request ********************\n");
+
+        // Check for bad customer address data
+        if (iScanfCnt < 4)
+            exitError(ERR_CUSTOMER_ADDRESS_DATA, szInputBuffer);
+
+        printf("%s %s (%c %s)\n"
+            , pCustomer->szEmailAddr
+            , pCustomer->szFullName
+            , pCustomer->cGender
+            , pCustomer->szBirthDt);
+
+        printf("%s\n%s %s %s\n"
+            , pCustomer->szStreetAddress
+            , pCustomer->szCity
+            , pCustomer->szStateCd
+            , pCustomer->szZipCd);
 
         printf("\t\t\t\t%-10s %8s %10s %8s\n"
             , "Flight Id"
@@ -249,7 +283,7 @@ void processCustomerCommand(Flight flightM[], int iFlightCnt
     {
         int i;
         // get a flight request
-        // your code 
+        // your code
 
 
         // find the flight in the array
@@ -257,7 +291,7 @@ void processCustomerCommand(Flight flightM[], int iFlightCnt
 
         // your code
 
-  
+
     }
     else printf("   *** %s %s\n", ERR_CUSTOMER_SUB_COMMAND, pszSubCommand);
 }
@@ -268,7 +302,7 @@ Purpose:
     Processes the subcommands associated with the FLIGHT command:
         FLIGHT INCREASE szFlightId iQuantity
                increase the available seats for a flight by the specified quantity.
-        FLIGHT SHOW szFlightId    
+        FLIGHT SHOW szFlightId
                requests a display of a particular flight.  Show all of its information.
 Parameters:
     I/O Flight flightM[]              Array of flights
@@ -284,7 +318,7 @@ void processFlightCommand(Flight flightM[], int iFlightCnt
                              , char *pszSubCommand, char *pszRemainingInput)
 {
     Flight flight;
-    int iQuantity;      // quantity of seats 
+    int iQuantity;      // quantity of seats
     int iScanfCnt;
     int i;
 
@@ -295,7 +329,7 @@ void processFlightCommand(Flight flightM[], int iFlightCnt
 /******************** search *****************************
     int search(Flight flightM[], int iFlightCnt, char *pszMatchFlightId)
 Purpose:
-    
+
 Parameters:
     I   Flight flightM[]               Array of flights
     I   int   iFlightCnt               Number of elments in flightM[]
@@ -306,31 +340,32 @@ Returns:
 Notes:
 
 **************************************************************************/
+// Old code from the skeleton
+//int search(Flight flightM[], int iFlightCnt, char *pszMatchFlightId)
+//{
+//    // your code
+//
+//
+//}
+// My code for the binary search
 int search(Flight flightM[], int iFlightCnt, char *pszMatchFlightId)
 {
-    // your code
+	int LB, UB, MID;
+	LB = 0;
+	UB = iFlightCnt - 1; //UB,  LB initially set to represent entire array
 
+	while ( LB <= UB)
+	{
+            //find the new midpoint
+    		MID = (LB+UB) / 2;
 
+    		if (strcmp(pszMatchFlightId, flightM[MID].szFlightId) == 0)
+         		return MID;     //success
+    		else if (strcmp(pszMatchFlightId, flightM[MID].szFlightId) < 0)
+         		UB = MID - 1;    //set new UB one less than midpoint
+    		else
+         		LB = MID + 1;    //set new LB on greater than midpoint
+	}
+
+       return -1;
 }
-
-//int binarySearch (int numbers[], int length, int iMatch)
-//{
-//	int LB, UB, MID;
-//	LB = 0;
-//	UB = length – 1; //UB,  LB initially set to represent entire array
-//
-//	while ( LB <= UB)
-//	{
-//                //find the new midpoint
-//    		MID = (LB+UB) / 2;
-//
-//    		if (iMatch == numbers[MID])
-//         		return MID;     //success
-//    		else if (iMatch < numbers[MID])
-//         		UB = MID – 1;    //set new UB one less than midpoint
-//    		else
-//         		LB = MID + 1;    //set new LB on greater than midpoint
-//	}
-//
-//       return -1;
-//}

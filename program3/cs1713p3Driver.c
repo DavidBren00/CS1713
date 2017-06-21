@@ -1,38 +1,39 @@
 /**********************************************************************
 cs1713p3Driver.c
+GitHub Test Push
 Purpose:
-    This program reads flight information and a command file.   It 
+    This program reads flight information and a command file.   It
     processes the commands against the flight information.
     This is the driver code for the routines written by the students.
 Command Parameters:
     p3 -f flightFileName -c commandFileName
 Input:
     Flight   Stream input file which contains many records defining flights:
-                 szFlightId szFrom  szDest  szDepartTm  iAvailSeats dSeatPrice 
-                 10s        3s      3s      5s          4d          10lf 
+                 szFlightId szFrom  szDest  szDepartTm  iAvailSeats dSeatPrice
+                 10s        3s      3s      5s          4d          10lf
 
-    Command  This is different from the previous assignment.  The file contains 
-             text in the form of commands (one command per text line):  
+    Command  This is different from the previous assignment.  The file contains
+             text in the form of commands (one command per text line):
                  CUSTOMER BEGIN cGender   szBirthDt   szEmailAddr    szFullName
-                     specifies the beginning of customer request and includes 
-                     all the identification information from program 2.
+                     specifies the beginning of customer request and includes
+                     all the i.dentification information from program 2.
                  CUSTOMER ADDRESS szStreetAddress,szCity,szStateCd,szZipCd
                      specifies the address for a customer (separated by commas)
                  CUSTOMER REQUEST szFlightId iNumSeats
                     specifies a single flight request.  Steps:
                      >	Print the flight ID and requested number of seats
-                     >	Lookup the flight ID using a binary search.  If not found, 
+                     >	Lookup the flight ID using a binary search.  If not found,
                         print a warning (but do not terminate your program) and return.
-                     >	If found, try to satisfy the entire requested number of seats.  
+                     >	If found, try to satisfy the entire requested number of seats.
                         If not enough seats,  print a warning and return.
                      >	Print the unit price and cost.
                      >	Accumulate the total cost for this customer
                  CUSTOMER COMPLETE
-                     specifies the completion of the list of flight requests 
+                     specifies the completion of the list of flight requests
                      for a customer.
                  FLIGHT INCREASE szFlightId iQuantity
                      increase the available seats for a flight by the specified quantity.
-                 FLIGHT SHOW szFlightId    
+                 FLIGHT SHOW szFlightId
                      requests a display of a particular flight.  Show all of its information.
 
 Results:
@@ -59,7 +60,6 @@ Notes:
 #include <string.h>
 #include <stdlib.h>
 #include "cs1713p3.h"
-#include "p3mat574.c"
 
 // prototypes for this file
 void processCommandSwitches(int argc, char *argv[], char **ppszFlightFileName
@@ -81,7 +81,7 @@ int main(int argc, char *argv[])
     // get the flight, print it, sort it, and print the sorted
     iFlightCnt = getFlights(flightM, pszFlightFileName);
     printFlights("Initial Flights", flightM, iFlightCnt);
-    
+
     sortFlights(flightM, iFlightCnt);
     printFlights("Sorted Flights", flightM, iFlightCnt);
 
@@ -116,9 +116,9 @@ void processCommands(Flight flightM[], int iFlightCnt
     char szCommand[MAX_TOKEN_SIZE+1];       // command
     char szSubCommand[MAX_TOKEN_SIZE+1];    // subcommand
     int bGotToken;                          // TRUE if getSimpleToken got a token
-    int iBufferPosition;                    // This is used by getSimpleToken to 
+    int iBufferPosition;                    // This is used by getSimpleToken to
                                             // track parsing position within input buffer
- 
+
     // variables for customer information (except Flight Request)
     Customer customer;
     double dCustomerRequestTotalCost = 0.0;
@@ -130,7 +130,7 @@ void processCommands(Flight flightM[], int iFlightCnt
     pfileCommand = fopen(pszCommandFileName, "r");
     if (pfileCommand == NULL)
         exitError(ERR_COMMAND_FILENAME, pszCommandFileName);
-    
+
     /* get command data until EOF
     ** fgets returns null when EOF is reached.
     */
@@ -162,7 +162,7 @@ void processCommands(Flight flightM[], int iFlightCnt
                     , &szInputBuffer[iBufferPosition]);
             else exitError(ERR_FLIGHT_SUB_COMMAND, " missing subcommand");
         }
-        else 
+        else
             exitError(ERR_INVALID_COMMAND, szCommand);
     }
     fclose(pfileCommand);
@@ -171,16 +171,16 @@ void processCommands(Flight flightM[], int iFlightCnt
  /******************** getSimpleToken **************************************
  int getSimpleToken(char szInput[], int *piBufferPosition, char szToken[])
  Purpose:
-    Returns the next token in a string.  The delimiter for the token is a 
-    space, a newline or the end of the string.  To help with a 
+    Returns the next token in a string.  The delimiter for the token is a
+    space, a newline or the end of the string.  To help with a
     subsequent call, it also returns the next position in the buffer.
 Parameters:
     I   char szInput[]          input buffer to be parsed
     I/O int *piBufferPosition   Position to begin looking for the next token.
-                                This is also used to return the next 
+                                This is also used to return the next
                                 position to look for a token (which will
                                 follow the delimiter).
-    O   char szToken[]          Returned token.  
+    O   char szToken[]          Returned token.
 Returns:
     Functionally:
         TRUE - a token is returned
@@ -191,12 +191,12 @@ Notes:
     - If the token is larger than the szToken parm, we return a truncated value.
 **************************************************************************/
 
-int getSimpleToken(char szInput[], int *piBufferPosition, char szToken[]) 
+int getSimpleToken(char szInput[], int *piBufferPosition, char szToken[])
 {
     int iDelimPos;                      // found position of delim
     int iCopy;                          // number of characters to copy
     char szDelims[20] = " \n";          // delimiters
-    
+
     // check for past the end of the string
     if (*piBufferPosition >= (int) strlen(szInput))
     {
@@ -212,13 +212,13 @@ int getSimpleToken(char szInput[], int *piBufferPosition, char szToken[])
         iCopy = MAX_TOKEN_SIZE;             // truncated size
     else
         iCopy = iDelimPos;
-    
+
     // copy the token into the target token variable
     memcpy(szToken, &szInput[*piBufferPosition], iCopy);
     szToken[iCopy] = '\0';              // null terminate
 
     // advance the position
-    *piBufferPosition += iDelimPos + 1;  
+    *piBufferPosition += iDelimPos + 1;
     return TRUE;
 }
 
