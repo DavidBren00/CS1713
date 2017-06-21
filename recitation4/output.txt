@@ -1,0 +1,5 @@
+The random number is 2
+'By The Way' by Red Hot Chili Peppers
+--------------------------------
+Process exited after 0.009907 seconds with return value 37
+Press any key to continue . . .

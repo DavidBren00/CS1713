@@ -1,0 +1,14 @@
+Enter an integer: 5
+Your integer is: 5
+Enter a floating point: 4
+Your floating point is: 4.000000
+Enter a character: r
+Your character is: r
+Enter a string (length 10 chars): helloworld
+Your string is: helloworld
+Your character as an integer format is: 114
+Your string as an integer format is: 2293296
+
+--------------------------------
+Process exited after 7.046 seconds with return value 0
+Press any key to continue . . .

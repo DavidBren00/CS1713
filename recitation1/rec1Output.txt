@@ -1,0 +1,30 @@
+2. delete a semicolon
+Compile error
+14	2	V:\CS1713\recitation\recitation1\rec1.cpp	[Error] expected ';' before 'return'
+
+3. add curly brace
+Compile error
+15	1	V:\CS1713\recitation\recitation1\rec1.cpp	[Error] expected '}' at end of input
+
+4. remove curly brace
+Compile error
+13	10	V:\CS1713\recitation\recitation1\rec1.cpp	[Error] expected '}' at end of input
+
+5. add quote character
+Compile error
+11	2	V:\CS1713\recitation\recitation1\rec1.cpp	[Error] missing terminating " character
+
+6. remove quote character
+Compile error
+11	2	V:\CS1713\recitation\recitation1\rec1.cpp	[Error] missing terminating " character
+
+7. add 5 different numbers
+Compile error
+12	2	V:\CS1713\recitation\recitation1\rec1.cpp	[Error] expected ';' before 'printf'
+
+8. add 5 different letters
+Compile error
+11	2	V:\CS1713\recitation\recitation1\rec1.cpp	[Error] 'qwert' was not declared in this scope
+
+9. remove 5 letters
+No error
