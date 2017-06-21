@@ -1,0 +1,38 @@
+******************* Flight Reservation Request  **********************
+petem@xyz.net Pete Moss (M 1986/01/01)
+123 Boggy Lane
+New Orleans, LA 70112
+   H100.15005    2
+   H222.15005    2
+   H200.15010    2
+   H333.15010    2
+******************* Flight Reservation Request  **********************
+pcorn@abc.net Pop Corn (M 1957/02/02)
+456 Kernel
+San Antonio, TX 78210
+   H222.15005   10
+   HXXX.XXXXX   10
+   H333.15010    5
+******************* Flight Reservation Request  **********************
+pennyl@xyz.net Penny Loafer (F 1958/03/03)
+789 Walking St
+Philadelphia, PA 19102
+   H444.15001    1
+   H333.15010    1
+******************* Flight Reservation Request  **********************
+hgilmore@xyz.net Adam Sandler (M 1979/04/04)
+444 Golf View
+Hollywood, CA 92274
+   H100.15005    3
+******************* Flight Reservation Request  **********************
+butter@xyz.net Melba Toast (F 1989/05/05)
+222 Cracker Blvd
+San Antonio, TX 78222
+   H333.15010    2
+   H444.15015    2
+******************* Flight Reservation Request  **********************
+
+
+--------------------------------
+Process exited after 0.004342 seconds with return value 0
+Press any key to continue . . .

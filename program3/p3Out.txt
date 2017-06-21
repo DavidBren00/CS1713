@@ -1,0 +1,144 @@
+Initial Flights
+    Flight Id    From Dest Depart Avail   Unit Price
+    H100.15005   SAT  HOU  08:00      4        65.00
+    H111.15009   SAT  HOU  17:00     10        65.00
+    H555.15022   SAT  DFW  08:00     70        70.00
+    H444.15015   ATL  NYC  08:00     10       130.00
+    H200.15010   ATL  HOU  08:00     20       120.00
+    H222.15005   HOU  ATL  10:00     15       125.00
+    H333.15010   ATL  NYC  13:00     20       130.00
+    H444.15001   ATL  NYC  08:00     10       130.00
+    H100.15006   SAT  HOU  08:00     12        65.00
+    H333.15012   ATL  NYC  12:55     60       130.00
+    H666.15020   NYC  ATL  01:45     50       140.00
+Sorted Flights
+    Flight Id    From Dest Depart Avail   Unit Price
+    H100.15005   SAT  HOU  08:00      4        65.00
+    H100.15006   SAT  HOU  08:00     12        65.00
+    H111.15009   SAT  HOU  17:00     10        65.00
+    H200.15010   ATL  HOU  08:00     20       120.00
+    H222.15005   HOU  ATL  10:00     15       125.00
+    H333.15010   ATL  NYC  13:00     20       130.00
+    H333.15012   ATL  NYC  12:55     60       130.00
+    H444.15001   ATL  NYC  08:00     10       130.00
+    H444.15015   ATL  NYC  08:00     10       130.00
+    H555.15022   SAT  DFW  08:00     70        70.00
+    H666.15020   NYC  ATL  01:45     50       140.00
+CUSTOMER BEGIN M 1986/01/01 petem@xyz.net Pete Moss
+CUSTOMER ADDRESS 123 Boggy Lane,New Orleans,LA,70112
+******************* Flight Reservation Request  ***********************
+petem@xyz.net Pete Moss (M 1986/01/01)
+123 Boggy Lane
+New Orleans, LA 70112
+				Flight Id  Quantity Unit Price     Cost
+CUSTOMER REQUEST H100.15005 2      
+				H100.15005        2      65.00   130.00
+CUSTOMER REQUEST H222.15005 2
+				H222.15005        2     125.00   250.00
+CUSTOMER REQUEST H200.15010 2
+				H200.15010        2     120.00   240.00
+CUSTOMER REQUEST H333.15010 2
+				H333.15010        2     130.00   260.00
+CUSTOMER COMPLETE
+				                    Total Cost   880.00
+***********************************************************************
+CUSTOMER BEGIN M 1957/02/02 pcorn@abc.net Pop Corn
+CUSTOMER ADDRESS 456 Kernel,San Antonio,TX,78210
+******************* Flight Reservation Request  ***********************
+pcorn@abc.net Pop Corn (M 1957/02/02)
+456 Kernel
+San Antonio, TX 78210
+				Flight Id  Quantity Unit Price     Cost
+CUSTOMER REQUEST H222.15005 10
+				H222.15005       10     125.00  1250.00
+CUSTOMER REQUEST HXXX.XXXXX 10
+				HXXX.XXXXX       10	*** flight ID not found 
+CUSTOMER REQUEST H333.15010 5
+				H333.15010        5     130.00   650.00
+CUSTOMER COMPLETE
+				                    Total Cost  1900.00
+***********************************************************************
+FLIGHT SHOW H222.15005 
+    H222.15005   HOU  ATL  10:00      3       125.00
+CUSTOMER BEGIN F 1958/03/03 pennyl@xyz.net Penny Loafer
+CUSTOMER ADDRESS 789 Walking St,Philadelphia,PA,19102
+******************* Flight Reservation Request  ***********************
+pennyl@xyz.net Penny Loafer (F 1958/03/03)
+789 Walking St
+Philadelphia, PA 19102
+				Flight Id  Quantity Unit Price     Cost
+CUSTOMER REQUEST H444.15001 1
+				H444.15001        1     130.00   130.00
+CUSTOMER REQUEST H333.15010 1
+				H333.15010        1     130.00   130.00
+CUSTOMER COMPLETE
+				                    Total Cost   260.00
+***********************************************************************
+CUSTOMER BEGIN M 1979/04/04 hgilmore@xyz.net Adam Sandler
+CUSTOMER ADDRESS 444 Golf View,Hollywood,CA,92274
+******************* Flight Reservation Request  ***********************
+hgilmore@xyz.net Adam Sandler (M 1979/04/04)
+444 Golf View
+Hollywood, CA 92274
+				Flight Id  Quantity Unit Price     Cost
+CUSTOMER REQUEST H100.15005 3
+				H100.15005        3	*** not enough available seats to satisfy request 
+CUSTOMER REQUEST H222.15005 3
+				H222.15005        3     125.00   375.00
+CUSTOMER REQUEST H333.15010 3
+				H333.15010        3     130.00   390.00
+CUSTOMER COMPLETE
+				                    Total Cost   765.00
+***********************************************************************
+FLIGHT SHOW H333.15010 
+    H333.15010   ATL  NYC  13:00      9       130.00
+CUSTOMER BEGIN F 1989/05/05 butter@xyz.net Melba Toast
+CUSTOMER ADDRESS 222 Cracker Blvd,San Antonio,TX,78222 
+******************* Flight Reservation Request  ***********************
+butter@xyz.net Melba Toast (F 1989/05/05)
+222 Cracker Blvd
+San Antonio, TX 78222
+				Flight Id  Quantity Unit Price     Cost
+CUSTOMER REQUEST H333.15010 2
+				H333.15010        2     130.00   260.00
+CUSTOMER REQUEST H444.15015 2
+				H444.15015        2     130.00   260.00
+CUSTOMER COMPLETE
+				                    Total Cost   520.00
+***********************************************************************
+FLIGHT INCREASE H333.XXXXX 2
+					*** flight ID not found 
+FLIGHT SHOW H333.XXXXX
+					*** flight ID not found 
+FLIGHT SHOW H333.15010
+    H333.15010   ATL  NYC  13:00      7       130.00
+FLIGHT INCREASE H333.15010 2
+FLIGHT SHOW H333.15010
+    H333.15010   ATL  NYC  13:00      9       130.00
+CUSTOMER BEGIN M 1957/12/12 captscope@navy.gov Perry Scope
+CUSTOMER ADDRESS 111 Anchor Way,Pensacola,FL,32501
+******************* Flight Reservation Request  ***********************
+captscope@navy.gov Perry Scope (M 1957/12/12)
+111 Anchor Way
+Pensacola, FL 32501
+				Flight Id  Quantity Unit Price     Cost
+CUSTOMER REQUEST H333.15012 2
+				H333.15012        2     130.00   260.00
+CUSTOMER REQUEST H666.15020 2
+				H666.15020        2     140.00   280.00
+CUSTOMER COMPLETE
+				                    Total Cost   540.00
+***********************************************************************
+Resulting Flights
+    Flight Id    From Dest Depart Avail   Unit Price
+    H100.15005   SAT  HOU  08:00      2        65.00
+    H100.15006   SAT  HOU  08:00     12        65.00
+    H111.15009   SAT  HOU  17:00     10        65.00
+    H200.15010   ATL  HOU  08:00     18       120.00
+    H222.15005   HOU  ATL  10:00      0       125.00
+    H333.15010   ATL  NYC  13:00      9       130.00
+    H333.15012   ATL  NYC  12:55     58       130.00
+    H444.15001   ATL  NYC  08:00      9       130.00
+    H444.15015   ATL  NYC  08:00      8       130.00
+    H555.15022   SAT  DFW  08:00     70        70.00
+    H666.15020   NYC  ATL  01:45     48       140.00

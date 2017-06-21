@@ -1,0 +1,27 @@
+M 1986/01/01 petem@xyz.net Pete Moss
+123 Boggy Lane,New Orleans,LA,70112
+H100.15005 2      
+H222.15005 2
+H200.15010 2
+H333.15010 2       
+END 0
+M 1957/02/02 pcorn@abc.net Pop Corn
+456 Kernel,San Antonio,TX,78210
+H222.15005 10
+HXXX.XXXXX 10
+H333.15010 5
+END 0
+F 1958/03/03 pennyl@xyz.net Penny Loafer
+789 Walking St,Philadelphia,PA,19102
+H444.15001 1
+H333.15010 ABC50
+END 0
+M 1979/04/04 hgilmore@xyz.net Adam Sandler
+444 Golf View,Hollywood,CA,92274
+H100.15005 3
+END 0
+F 1989/05/05 butter@xyz.net Melba Toast
+222 Cracker Blvd,San Antonio,TX,78222 
+H333.15010 2
+H444.15015 2
+END 0
