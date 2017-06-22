@@ -92,17 +92,17 @@ int getFlights(Flight flightM[], char * pszFlightFileName)
 		iScanfCnt = sscanf(szInputBuffer, "%10s %3s %3s %5s %4d %10lf\n"
         		, flightM[i].szFlightId
         		, flightM[i].szFrom
-            	, flightM[i].szDest
-            	, flightM[i].szDepartTm
-            	, &flightM[i].iAvailSeatCnt
-            	, &flightM[i].dSeatPrice
+            , flightM[i].szDest
+            , flightM[i].szDepartTm
+            , &flightM[i].iAvailSeatCnt
+            , &flightM[i].dSeatPrice
 		);
 
 		if(iScanfCnt < 6) {
 			exitError(ERR_FLIGHT_DEF_DATA, szInputBuffer);
 		}
 		i++;
-	} // end while loop
+	  } // end while loop
     fclose(pFileFlight);
     return i;
 }
@@ -302,6 +302,7 @@ void processCustomerCommand(Flight flightM[], int iFlightCnt
         i = search(flightM, iFlightCnt, flightRequest.szFlightId);
 
         // your code
+        // TODO: Finish processing the flight request and calculating the total cost (6/21/17)
         if (i = -1) {
         	printf("*** flight ID not found\n");
     	} else if (flightRequest.iRequestSeats > flightM[i].iAvailSeatCnt) {
