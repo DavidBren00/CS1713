@@ -229,6 +229,7 @@ void processCustomerCommand(Flight flightM[], int iFlightCnt
     if (strcmp(pszSubCommand, "BEGIN") == 0)
     {
         // get the Customer Identification Information
+        // your code
         iScanfCnt = sscanf(pszRemainingInput, "%c %10s %40s %30[^\n]\n"
              , &pCustomer->cGender
              , pCustomer->szBirthDt
@@ -243,6 +244,7 @@ void processCustomerCommand(Flight flightM[], int iFlightCnt
     {
         // print the customer's total cost
         // your code
+
 	}
 
     else if (strcmp(pszSubCommand, "ADDRESS") == 0)
@@ -282,16 +284,36 @@ void processCustomerCommand(Flight flightM[], int iFlightCnt
     else if (strcmp(pszSubCommand, "REQUEST") == 0)
     {
         int i;
+        double totalCost = 0.0;
         // get a flight request
-        // your code
+        iScanfCnt = sscanf(pszRemainingInput, "%10s %4d"
+                , flightRequest.szFlightId
+                , &flightRequest.iRequestSeats);
+        // Check for bad reservation data
+        if (iScanfCnt < 2) {
+        	exitError(ERR_RESERVATION_DATA, pszRemainingInput);
+		}
+        // Print the flight request information
+        	printf("\t\t\t\t%-10s    %5d\t", flightRequest.szFlightId
+            	, flightRequest.iRequestSeats);
+        //printf("Customer Request Info\n");
 
-
-        // find the flight in the array
+		// find the flight in the array
         i = search(flightM, iFlightCnt, flightRequest.szFlightId);
 
         // your code
-
-
+        if (i = -1) {
+        	printf("*** flight ID not found\n");
+    	} else if (flightRequest.iRequestSeats > flightM[i].iAvailSeatCnt) {
+            printf("*** insufficient seats\n");
+    	} else {
+    		count = flightM[i].iAvailSeatCnt-flightRequest.iRequestSeats;
+            flightM[i].iAvailSeatCnt = count;
+            printf("%.2f\t\t", flightM[i].dSeatPrice);
+            float cost = (flightM[i].dSeatPrice*flightRequest.iRequestSeats);
+            printf("%.2f\n", cost);
+            totalCost = totalCost + cost;
+		}
     }
     else printf("   *** %s %s\n", ERR_CUSTOMER_SUB_COMMAND, pszSubCommand);
 }
@@ -340,14 +362,6 @@ Returns:
 Notes:
 
 **************************************************************************/
-// Old code from the skeleton
-//int search(Flight flightM[], int iFlightCnt, char *pszMatchFlightId)
-//{
-//    // your code
-//
-//
-//}
-// My code for the binary search
 int search(Flight flightM[], int iFlightCnt, char *pszMatchFlightId)
 {
 	int LB, UB, MID;
